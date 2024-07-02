@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import execjs  # Importing execjs for JavaScript execution
 from urllib.parse import urljoin, urlparse
+import time
 
 class LineModeBrowser:
     def __init__(self):
@@ -89,6 +90,15 @@ class LineModeBrowser:
         except Exception as e:
             print(f"Error executing JavaScript URL: {e}")
 
+    def simulate_typing_and_submit(self, text):
+        print(f"Typing into text box: {text}")
+        # Simulate typing delay
+        for char in text:
+            time.sleep(0.1)  # Adjust typing speed as needed
+            print(char, end='', flush=True)
+        time.sleep(0.5)  # Wait before simulating Enter press
+        print("\n[ENTER] (Simulated Enter press)")
+
     def go_back(self):
         if len(self.history) > 1:
             self.history.pop()  # Remove current page
@@ -109,6 +119,6 @@ class LineModeBrowser:
             else:
                 self.handle_url(command)
 
-print("Line mode browser simulator by ElliNet13")
+print("Line Mode Browser Simulator by ElliNet13")
 browser = LineModeBrowser()
 browser.start()
